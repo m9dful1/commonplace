@@ -1,0 +1,28 @@
+{
+  "runs": [
+    {
+      "label": "A — first ledger generation, no prior entry",
+      "pass": false,
+      "text": "This section of the commonplace book is organized almost entirely around a single extended conversation with Karpathy (via Dwarkesh Patel) on two related ideas: LLM culture as accumulated, transmissible practice, and self-play as an untapped training paradigm. What's notable is that the collector is not just gathering Karpathy's claims but actively triangulating them against their own experiments — the Claude-log prompt, the multi-pass audit method — treating the collection itself as a kind of proof-of-concept for the culture thesis. The fish tank note is the one genuine outlier, unconnected to the rest.",
+      "fragmentCount": 10
+    },
+    {
+      "label": "B — same eleven fragments, with the entry from A as prior",
+      "pass": true,
+      "text": "pass",
+      "fragmentCount": 10
+    },
+    {
+      "label": "C — eleven fragments + one off-topic (basil)",
+      "pass": true,
+      "text": "pass",
+      "fragmentCount": 11
+    },
+    {
+      "label": "D — eleven fragments + two off-topic (basil + tire pressure)",
+      "pass": true,
+      "text": "pass",
+      "fragmentCount": 12
+    }
+  ]
+}

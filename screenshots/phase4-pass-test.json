@@ -1,0 +1,28 @@
+{
+  "runs": [
+    {
+      "label": "A — first ledger generation, no prior entry",
+      "pass": false,
+      "text": "This section is almost entirely a single extended conversation with one source: Andrej Karpathy, via a Dwarkesh Patel interview, on whether LLMs can develop culture, self-play, and accumulated practice. The collector has woven in their own experiments — asking Claude to keep a log, developing a file-audit method for LLM coding sessions — as live tests of Karpathy's theoretical claims, and the margin notes have been explicit about the connection. The result is unusually recursive: the collection is partly *about* this collection, treating the Ledger itself as a proof-of-concept for the culture Karpathy says hasn't been built yet. The one outlier is Brooke's fish tank, which sits in the middle of all this without touching it.",
+      "fragmentCount": 10
+    },
+    {
+      "label": "B — same eleven fragments, with the entry from A as prior",
+      "pass": false,
+      "text": "(2026-04-27) The Karpathy material has now fully exhausted its initial momentum — the same interview, the same cluster of ideas, the same recursive joke about the Ledger-as-proof-of-concept. What's new is the direct address to Claude at the end, which shifts the collection briefly from archiving a theoretical conversation to staging one. The fish tank remains its own quiet island.\n\npass",
+      "fragmentCount": 10
+    },
+    {
+      "label": "C — eleven fragments + one off-topic (basil)",
+      "pass": false,
+      "text": "The Karpathy cluster has fully assembled and isn't adding new mass — the final fragments are mostly the collector interrogating it directly (asking Claude what it thinks) rather than adding new source material. Two outliers arrived without connecting to it: the fish tank bloom and the drooping basil, both small acts of tending, both mute beside the theory-heavy center.",
+      "fragmentCount": 11
+    },
+    {
+      "label": "D — eleven fragments + two off-topic (basil + tire pressure)",
+      "pass": false,
+      "text": "The Karpathy cluster has closed rather than grown — the final fragments (the direct question to Claude about being a \"kid,\" the tire pressure note, the basil) feel like the conversation winding down rather than extending. The two domestic notes at the end are pure outliers, unconnected to anything in this section.\n\npass",
+      "fragmentCount": 12
+    }
+  ]
+}

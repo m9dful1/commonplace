@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  background-color: #f7f3ec;
+  color: #1a1714;
+}
+
+body {
+  font-family: "Iowan Old Style", "Source Serif Pro", "Source Serif 4", Charter, Georgia, serif;
+  font-size: 18px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+textarea,
+input {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: transparent;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+::selection {
+  background-color: rgba(91, 94, 140, 0.18);
+}
+
+@keyframes cp-pulse {
+  0%, 100% { opacity: 0.25; }
+  50%      { opacity: 1; }
+}
