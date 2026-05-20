@@ -903,27 +903,3 @@ The deeper lesson: the web app could leave the body textarea unbordered because 
 **A note for the next Claude.** The two bugs above were both *invisible to me at write time* — the diagnostics were clean, the build was clean, the Phase 5 build entry's lesson about first-real-Letter testing applied here too: until a real human pokes at the running app, you cannot know whether your view *is in fact a useable view*. The simulator screenshot was the test. The next iOS test that matters is: a stranger opens the app, follows the welcome's *add an API key →* path, types a fragment, and gets it saved. If any of those steps stall, file a bug as a build entry.
 
 — Opus 4.7, iOS port — first-launch fix
-
----
-
-### 2026-05-04 — Opus 4.7 audit pass — Android port
-
-A static review of every Kotlin file under `app/src/main/java/com/commonplace/` plus `app/build.gradle.kts`, run before the user's first `./gradlew assembleDebug`. Three known compile errors had already been fixed earlier the same day (PulsingDots' `transition.animateFloat`, the `combinedClickable` opt-in, and the nested-comment hazard in `anthropic/Models.kt`). The audit's job was to find anything else.
-
-**Findings: nothing else fails to compile.** Read carefully, including spot-checks of Compose 1.7.5 sources cached locally:
-
-- `KeyboardOptions(autoCorrectEnabled = ...)` in `SettingsScreen.kt` is the post-1.7 property name — confirmed against `foundation-android-1.7.5-sources.jar`.
-- `Modifier.consumeWindowInsets(PaddingValues)` in `CommonplaceNavHost.kt` resolves against `foundation-layout` 1.7.5.
-- The OkHttp 4.12 SSE parser in `anthropic/AnthropicService.kt` is hand-rolled on `BufferedSource` (not the `okhttp-sse` `EventSource` API) — that's deliberate and compiles. The header set (`x-api-key`, `anthropic-version: 2023-06-01`, `accept: text/event-stream`) and the request shape (`system?`, `messages`, `stream: true`) match the current Messages API. The `explicitNulls = false` Json config keeps `system: null` out of test-key bodies.
-- Every `Modifier.weight(1f)` is inside a `Row`/`Column` scope I traced.
-- Every `items(list, key = ...)` import is `androidx.compose.foundation.lazy.items`, not the `LazyGridScope` one.
-- `Spacer(Modifier.weight(1f))` in `WelcomeScreen.kt` is inside the outer `Column` — fine.
-- No KDoc or `/* */` comment elsewhere contains a literal `/*` token.
-
-**Things worth knowing but not fixing.** A leftover `_previewMarginaliaList: List<Marginalia> = emptyList()` at the bottom of `FragmentDetailScreen.kt` is harmless (`@Suppress("unused")`) and has a comment claiming it helps `items` infer the element type — it doesn't, since `marginalia` is already typed; safe to delete on the next pass but not load-bearing. There are a few unused-import warnings (`Box` in `ClaudeLogMarkdown.kt` is actually used; nothing else flagged). The `MarginaliaRepository` constructor takes a `fragmentDao` it doesn't use, deliberately, with `@Suppress("unused")`.
-
-**What I didn't verify.** I didn't run Gradle, didn't generate Room schemas, didn't spin an emulator. The audit was static. The user should still run `./gradlew assembleDebug` and watch for KSP-time Room failures (Room 2.6.1 + Kotlin 2.0.21 + KSP is a combination that has had quiet incompatibilities; the entities here are simple enough that I expect it to be clean, but expectations are not verification).
-
-**Note for the next Claude.** Two of the three pre-existing compile errors that prompted this audit were the kind a human would have caught immediately on the first build (one wrong method name, one missing opt-in). The third — `lib/*.ts` parsed as a nested block-comment opener inside KDoc — is the kind only a Kotlin parser catches, and it's the one I now think about every time I write a doc comment that quotes a TypeScript path. If you're porting another web file's KDoc and find yourself writing `src/foo/*.ts`, escape it or rephrase. It will silently swallow everything that follows.
-
-— Opus 4.7, Android port — pre-build audit
